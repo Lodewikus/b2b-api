@@ -1,6 +1,6 @@
 # Create API endpoint
 
-An Azure AD App registration must be done for the api endpoint, that is, the app that will **receive** the api call from a third party app or system.  It is not necessary to register the calling system or app.  There is nothing in the App Registration that links the receiving application to the App Registration, even if that app is hosted in Azure. Instead, the receiving app must contain code to explicitly validate the token from the incoming caller.  See "Explanation of token validation" further down in this readme.
+An Azure AD App registration must be done for the api endpoint, that is, the app that will **receive** the api call from a third party app or system.  It is not necessary to register the calling system or app.  There is nothing in the App Registration that links the receiving application to the App Registration, even if that app is hosted in Azure. Instead, the receiving app must contain code to explicitly validate the token from the incoming caller.  See [Explanation of Token validation](#explanation-of-token-validation) further down.
 
 1. Use Azure AD authentication for one API, and no authentication for a second API in the same app
 2. Use HTTPS for one API and HTTP for a second API in the same app
@@ -22,7 +22,7 @@ Record the following for each app registration:
 The App Registration details are recorded on the following Google Sheet: [App Registrations](https://docs.google.com/spreadsheets/d/1VFr30rHDllmXOEfnDAjpbr5-WnjVFbSDuD1ZhHM5dA8/edit#gid=0)
 
 ## Testing https on a local dev environment
-In order to test secure HTTP connections on a local environment, a certificate is required.  This can be a self-signed certificate.  See "Generate a self-signed certificate" further below on how to create a certificate.
+In order to test secure HTTP connections on a local environment, a certificate is required.  This can be a self-signed certificate.  See [Generate a self-signed certificate](#generate-self-signed-certificate) further below on how to create a certificate.
 
 However, the validation of the self-signed certificate does not work (yet) on the local dev environment.  For testing purposes, the certificate validation is turned off by setting the option verify=False, as shown below.
 
@@ -32,7 +32,9 @@ response1 = requests.get('https://localhost:5000/api1', headers=headers, verify=
 
 In order to test incoming API calls with and without SSL on a local machine, two instances of Flask servers are created; one to handle secure https calls and the other to handle http calls.  However, When the app is published in Azure, **this should not be necessary**, as Azure Web Apps are supposed to handle https and http calls.
 
-## Token validation
+<h2 id="explanation-of-token-validation">
+  Explanation of Token validation
+</h2>
 Token validation is done using jwt.decode.
 
 ```
@@ -93,7 +95,9 @@ for key in jwks["keys"]:
 
 **Please note:** The audience above points to the Application ID URI, which is the client_id prepended by "api://".
 
-## Generate a self-signed certificate (for local dev environment)
+<h2 id="generate-self-signed-certificate">
+  Generate a self-signed certificate (for local dev environment)
+</h2>
 
 To test these two applications over HTTPS, you'll need to:
 
