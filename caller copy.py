@@ -13,6 +13,9 @@ def acquire_token(client_id, client_secret, authority, scope):
 		print(result.get('correlation_id'))
 	exit(1)
 
+# The credentials below are for the following App Registration:
+# Display name: lims-hub-test1
+# Tenant: axnosis.com
 client_id = "c0755607-fa42-48ac-a94a-9bf563253f61"
 client_secret = "G8~8Q~tqLNLrM_XVhsQEbN3QhoOnadEwjHU_gc_i"
 tenant_id = "6124334a-1ce1-4f5f-9446-cf095fa3d52c"

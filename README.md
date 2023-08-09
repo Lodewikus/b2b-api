@@ -1,12 +1,55 @@
-# Create API endpoint
+# Purpose of this Program
 
-An Azure AD App registration must be done for the api endpoint, that is, the app that will **receive** the api call from a third party app or system.  It is not necessary to register the calling system or app.  There is nothing in the App Registration that links the receiving application to the App Registration, even if that app is hosted in Azure. Instead, the receiving app must contain code to explicitly validate the token from the incoming caller.  See [Explanation of Token validation](#explanation-of-token-validation) further down.
+This is part of a Proof of Concept to investigate how to set up authentication and secure connections (https api calls) between D365 and an Azure Web app.  The Azure Web app will also communicate via other endpoints using http api calls.  The following scenarios must be tested to provide the basis for the design of the Azure Web app.
 
 1. Use Azure AD authentication for one API, and no authentication for a second API in the same app
 2. Use HTTPS for one API and HTTP for a second API in the same app
 3. Validate the authentication token to ensure that the calling app is authorized to call this app
 
+## Clone the Proof of Concept repo to you local folder
+
+Navidate to a folder on your local drive where you want to create a local repo.  In a terminal window, execute the following command:
+
+`git clone https://github.com/Lodewikus/b2b-api.git`
+
+## Create a Python virtual environment
+
+Go into the new directory of the local repo, and create a virtual environment called "env".  It is important to use this name, as .gitignore is already set up to exclude this folder.
+
+```
+cd b2b
+python3 -m venv env
+```
+You need to change into the virtual environment to install the Python libraries.
+```
+source env/bin/activate
+pip3 install -r requirements.txt
+```
+
+You don't need to stay in the virtual environment when you are using VS Code, so exit the environment.
+```
+deactivate
+```
+
+Start VS Code by typing `code .` from the command line, while you are in the b2b folder.
+
+To make sure the code is executed from the Python instance in the local environment, check at the bottom right corner of VS Code that it is running Python from the virtual environment.  It should be as follows.<br>
+![Alt text](image.png)
+
+Else, click on the environment (bottom right) and see if the virtual environment is one of the options in the list.  If not, do the following:
+- Open the Command Palette (go to the View menu, or type CTRL-SHIFT-P)
+- Start typing "Python: Select interpretor" and choose it from the list
+- Click on "+ Enter interpreter path..."
+- Type in `./env/bin/python` and press enter
+
+If you want to run endpoint.py and test it from caller.py, these two programs must be run from different terminal sessions.  Do this by selecting the following:<br>
+![Alt text](image-1.png)
+
+VS Code will show a list of the terminal sessions at the bottom right of the screen.  Make sure you select the correct terminal session there to see the output.
+
 ## App registration
+An Azure AD App registration must be done for the api endpoint, that is, the app that will **receive** the api call from a third party app or system.  It is not necessary to register the calling system or app.  There is nothing in the App Registration that links the receiving application to the App Registration, even if that app is hosted in Azure. Instead, the receiving app must contain code to explicitly validate the token from the incoming caller.  See [Explanation of Token validation](#explanation-of-token-validation) further down.
+
 Go to https://portal.azure.com, and do the following:
 - Register new app in Azure AD
 - Create a secret (Certificates & secrets menu)
