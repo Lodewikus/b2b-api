@@ -12,7 +12,9 @@ def acquire_token(client_id, client_secret, authority, scope):
         print(result.get('error_description'))
         print(result.get('correlation_id'))  
         exit(1)
-
+# The credentials below are for the following App Registration:
+# Display name: app-endpoint
+# Tenant: trinergy.co.za
 client_id = "2eaf78be-97f7-44ee-8590-0adf91febc72"
 client_secret = "LI48Q~Q5tDBJCN~CrgKpH79uwqmNQ2M~-M4UHbj6"
 tenant_id = "72250571-2bdd-409c-9171-b48c97ee5d74"
