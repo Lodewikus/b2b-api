@@ -10,7 +10,9 @@ This is part of a Proof of Concept to investigate how to set up authentication a
 
 Navidate to a folder on your local drive where you want to create a local repo.  In a terminal window, execute the following command:
 
-`git clone https://github.com/Lodewikus/b2b-api.git`
+```
+git clone https://github.com/Lodewikus/b2b-api.git
+```
 
 ## Create a Python virtual environment
 
@@ -203,5 +205,3 @@ response = requests.get('https://localhost:5000/', headers=headers, verify=False
 **Note**: Running your application over HTTPS in a production environment typically involves a different setup, where you would likely use a WSGI server such as Gunicorn or uWSGI, along with a reverse proxy such as Nginx or Apache, which would handle HTTPS connections. 
 
 Please ensure to replace 'localhost:5000/' with your actual API server URL.
-
-
